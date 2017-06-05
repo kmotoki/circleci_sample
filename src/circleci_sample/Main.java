@@ -7,4 +7,7 @@ public class Main {
         System.out.println(classA.equailsWith("HOGE"));
     }
 
+    public void doSomething() {
+        System.out.println("Do something.");
+    }
 }
