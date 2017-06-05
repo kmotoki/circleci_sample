@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="blank"
+         basedir="."
+         default="compile">
+    <target name="compile"
+            depends="prepare">
+        <javac srcdir="src"
+               destdir="bin"
+               encoding="UTF8"
+               includeantruntime="false"
+               target="1.7">
+        </javac>
+    </target>
+    <target name="prepare">
+        <mkdir dir="bin"/>
+    </target>
+</project>
