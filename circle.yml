@@ -1,0 +1,25 @@
+machine:
+    timezone: Asia/Tokyo
+    ruby:
+        version: 2.2.0
+    java:
+        version: openjdk7
+    environment:
+        _JAVA_OPTIONS: "-Xms1024m -Xmx2048m"
+
+dependencies:
+    override:
+        - gem update bundler
+        - gem install --no-document findbugs_translate_checkstyle_format checkstyle_filter-git saddler saddler-reporter-github
+        - mkdir $HOME/checkstyle
+        - curl -sL https://sourceforge.net/projects/checkstyle/files/checkstyle/6.19/checkstyle-6.19-bin.tar.gz | tar xz --strip=1 -C $HOME/checkstyle
+        - mkdir $HOME/findbugs
+        - curl -sL http://prdownloads.sourceforge.net/findbugs/findbugs-3.0.1.tar.gz | tar xz --strip=1 -C $HOME/findbugs
+
+compile:
+    override:
+        - ant -buildfile build.xml
+
+test:
+    override:
+        - ./run_static_analyzer.sh
