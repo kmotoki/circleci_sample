@@ -11,4 +11,8 @@ public class ClassA {
             return false;
         }
     }
+
+    public void doSomething() {
+        System.out.println("Do something.");
+    }
 }
