@@ -14,8 +14,9 @@ if [ "${CIRCLE_BRANCH}" !=  "${DEFAULT_BRANCH}" ]; then
 
     # checkstyle による分析を実行する。
     echo $LIST \
-    | xargs java -Duser.language=ja -classpath $HOME/checkstyle/checkstyle-6.19-all.jar com.puppycrawl.tools.checkstyle.Main -c checkstyle.xml -f xml \
-    | bundle exec checkstyle_filter-git diff origin/${DEFAULT_BRANCH} \
+    | xargs java -Duser.language=ja -classpath $HOME/checkstyle/checkstyle-6.19-all.jar com.puppycrawl.tools.checkstyle.Main -c checkstyle.xml -f xml -o result.xml
+
+    bundle exec checkstyle_filter-git diff origin/${DEFAULT_BRANCH} < result.xml \
     | bundle exec saddler report \
         --require saddler/reporter/github \
         --reporter Saddler::Reporter::Github::CommitReviewComment
